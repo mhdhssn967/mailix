@@ -1,5 +1,6 @@
 import React from 'react'
 import './HomePage.css'
+import oq from '../assets/OQ.png'
 import { Link } from 'react-router-dom'
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
   return (
     <>
     <div className='home-container'>
+        <img width={'200px'} src={oq} alt="" />
         <h1>Mailix</h1>
         <h2>Choose your option</h2>
         <div className='options-container'>
