@@ -1,0 +1,27 @@
+.edit-mail{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    gap: 20px;
+}
+.edit-mail input{
+    width: 250px;
+    height: 25px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: solid 0.5px;
+    margin-bottom: 20px;
+    padding: 7px;
+    background-color: #1a1919;
+}
+.edit-mail div{
+    display: flex;
+    flex-direction: column;
+}
+.edit-mail-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

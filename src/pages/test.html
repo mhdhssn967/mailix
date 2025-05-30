@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quotation - Happy Moves</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Quotation</h1>
+      <p class="date">Date: <span id="quotationDate">{{ quotationDate }}</span></p>
+      <p class="valid-until">Valid Until: <span id="validUntil">{{ validUntil }}</span></p>
+    </header>
+
+    <section class="company-info">
+      <h2>{{ companyName }}</h2>
+      <p>{{ companyAddress }}</p>
+      <p>Phone: {{ companyPhone }}</p>
+      <p>Email: {{ companyEmail }}</p>
+      <p>Website: {{ companyWebsite }}</p>
+      <p>CIN: {{ companyCIN }}</p>
+    </section>
+
+    <section class="client-info">
+      <h3>To</h3>
+      <p>{{ clientName }}</p>
+      <p>{{ clientAddress }}</p>
+    </section>
+
+    <section class="items">
+      <h3>Quoted Items</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Unit Price (INR)</th>
+            <th>Total (INR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Happy Moves - Standard</td>
+            <td>1</td>
+            <td>4,50,000</td>
+            <td>4,50,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="summary">
+        <p>Subtotal: ₹ <span>{{ subtotal }}</span></p>
+        <p>GST (18%): ₹ <span>{{ gst }}</span></p>
+        <p class="total">Total Price: ₹ <strong>{{ totalPrice }}</strong></p>
+        <p>Discount: ₹ <span>{{ discount }}</span></p>
+        <p>Discounted Price: ₹ <strong>{{ discountedPrice }}</strong></p>
+      </div>
+    </section>
+
+    <section class="complementary">
+      <h3>Complementary Products</h3>
+      <ul>
+        <li>Meta Quest 3</li>
+        <li>Hygiene Eye Mask Set + Non-Alcoholic Cleaning Wipes</li>
+      </ul>
+    </section>
+
+    <section class="terms">
+      <h3>Software License Agreement</h3>
+      <ol>
+        <li><strong>License Grant:</strong> Non-transferable, 7 years of support included.</li>
+        <li><strong>Scope of Use:</strong> Not a healthcare product, to be used under supervision.</li>
+        <li><strong>Confidentiality:</strong> Pricing and content must remain confidential.</li>
+        <li><strong>Protection Against Cloning:</strong> Unauthorized cloning leads to penalties.</li>
+        <li><strong>Customer Support:</strong> Hardware issues are not Oqulix's liability.</li>
+        <li><strong>AMC:</strong> ₹45,000/year after 3 years, excludes feature updates.</li>
+        <li><strong>Damages:</strong> Physical damages not covered under warranty.</li>
+        <li><strong>Governing Law:</strong> Subject to applicable jurisdiction and arbitration.</li>
+      </ol>
+    </section>
+
+    <section class="payment">
+      <h3>Bank Details</h3>
+      <p><strong>Bank Name:</strong> HDFC Bank</p>
+      <p><strong>Account Holder:</strong> OQULIX PVT. LTD</p>
+      <p><strong>Account Number:</strong> 50200090596672</p>
+      <p><strong>IFSC:</strong> HDFC0004587</p>
+      <p><strong>Payment Terms:</strong> 50% advance, 50% before implementation day.</p>
+    </section>
+
+    <footer>
+      <p>Thank you for choosing <strong>Happy Moves</strong>.</p>
+    </footer>
+  </div>
+</body>
+</html>
