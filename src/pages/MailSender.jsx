@@ -3,7 +3,7 @@ import Mail from "./Mail";
 import EditMail from "./EditMail";
 import "./MailSender.css";
 import { useLocation } from "react-router-dom";
-import OneTimeMail from "./OneTImeMail";
+import OneTimeMail from "./OneTimeMail";
 
 const MailSender = () => {
   const [date, setDate] = useState(null);
