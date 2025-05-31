@@ -67,7 +67,7 @@ const handleDownloadPDF = async () => {
                 <input type="number" id="discount" onChange={(e)=>setDiscount(e.target.value)}/>
             </div>
         </div>
-        <button onClick={handleDownloadPDF}>Download PDF</button>
+        <button style={{backgroundColor:'white'}} onClick={handleDownloadPDF}>Download PDF</button>
       </div>
     </>
   );
