@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Mail.css";
 import OQ from "../assets/OQ.png";
 import seal from "../assets/seal.png";
@@ -9,6 +9,12 @@ import jsPDF from "jspdf";
 const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, addressLine2,quantity,price, gstPrice,gstForOneYear,monthTotal,yearTotal, yearlyPrice}) => {
   
 
+  const priceSection=useRef(null)
+  useEffect(() => {
+  if (price) {
+    priceSection.current?.scrollIntoView({ behavior: 'smooth' });
+  }
+}, [price]);
   
 
   return (
@@ -50,7 +56,7 @@ const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, 
               <p>
                 To, <br />
                 <strong>{name || 'Recipient Name'}</strong> <br />
-                <strong>{institutionName || 'Institution Name'}</strong> <br />
+                <strong className>  {institutionName || 'Institution Name'}</strong> <br />
                 {addressLine1 || 'Address Line 1'} <br />
                 {addressLine2 || 'Address Line 2'}
               </p>
@@ -105,7 +111,7 @@ const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, 
         {/* page 2 */}
         <h2>Page 2</h2>
         <div className="page" ref={(el) => (pageRefs.current[1] = el)}>
-          <div className="mail-header">
+          <div className="mail-header" ref={priceSection}>
             <img src={OQ} alt="" />
             <div className="adress">
               <p>

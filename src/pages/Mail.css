@@ -149,3 +149,14 @@
     display: flex;
     justify-content: space-between;
 }
+.glitter-div{
+    animation: glitter 1s;
+}
+
+@keyframes glitter{
+    0%{
+        background-color: yellow;
+    }100%{
+        background: none;
+    }
+}

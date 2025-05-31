@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Mail.css";
 import OQ from "../assets/OQ.png";
 import seal from "../assets/seal.png";
@@ -23,6 +23,14 @@ const OneTimeMail = ({
   oneTimeGST,
   oneTimeTotal,
 }) => {
+
+  const priceSection=useRef(null)
+  useEffect(() => {
+  if (price) {
+    priceSection.current?.scrollIntoView({ behavior: 'smooth' });
+  }
+}, [price]);
+
   return (
     <>
       <div className="container-mail-page">
@@ -114,9 +122,9 @@ const OneTimeMail = ({
         </div>
 
         {/* page 2 */}
-        <h2>Page 2</h2>
-        <div className="page" ref={(el) => (pageRefs.current[1] = el)}>
-          <div className="mail-header">
+        <h2 >Page 2</h2>
+        <div className="page" ref={(el) => (pageRefs.current[1] = el)} >
+          <div className="mail-header" ref={priceSection}>
             <img src={OQ} alt="" />
             <div className="adress">
               <p>
@@ -144,7 +152,7 @@ const OneTimeMail = ({
               <p>{date || "Date"}</p>
             </div>
 
-            <div className="quotation-table-div">
+            <div className="quotation-table-div" >
               <table className="quotation-table">
                 <thead>
                   <tr>
@@ -195,7 +203,7 @@ const OneTimeMail = ({
                 </tr>
                 {discount != 0 && (
                   <>
-                    <tr className="discount">
+                    <tr className="discount glitter-div" >
                       <td>DISCOUNT</td> <tr>INR {discount}</tr>
                     </tr>
                     <tr className="discount-total">
