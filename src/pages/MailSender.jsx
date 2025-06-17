@@ -12,18 +12,17 @@ const MailSender = () => {
   const [institutionName, setInstitutionName] = useState(null);
   const [addressLine1, setAddressLine1] = useState(null);
   const [addressLine2, setAddressLine2] = useState(null);
-  const [quantity, setQuantity] = useState(null);
+  const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-
+  const [unitPrice,setUnitPrice]=useState(0)
   const [gstPrice, setGstPrice] = useState(0);  
   const [gstForOneYear, setGstForOneYear] = useState(0);
   const [monthTotal, setMonthTotal] = useState(0);
   const [yearTotal, setYearTotal] = useState(0);
   const [yearlyPrice, setYearlyPrice]=useState(0)
-
+  const [complimentaryProducts,setComplimentaryProducts]=useState([])
   const [discount,setDiscount]=useState(0)  
-  const [oneTimeGST,setOneTimeGST]=useState(0)
-  
+  const [oneTimeGST,setOneTimeGST]=useState(0)  
   const [discountedPrice,setDiscountedPrice]=useState(0)
   const [oneTimeTotal,setOneTimeTotal]=useState(0)
   
@@ -115,6 +114,12 @@ useEffect(()=>{
     }
   ,[price])
 
+  useEffect(() => {
+  if (!isNaN(unitPrice) && !isNaN(quantity)) {
+    setPrice(unitPrice * quantity); // 🔹 This is the only calculation you want
+  }
+}, [quantity,unitPrice]);
+
   useEffect(()=>{
     {gstPrice&&setGstPrice(formatIndianCurrency(gstPrice))}
   },[gstPrice])
@@ -181,7 +186,10 @@ useEffect(()=>{
   setMonthTotal={setMonthTotal}
   setYearTotal={setYearTotal}
   setDiscount={setDiscount}
+  setUnitPrice={setUnitPrice}
   pageRefs={pageRefs}
+  setComplimentaryProducts={setComplimentaryProducts}
+  complimentaryProducts={complimentaryProducts}
 />
         </div>
         <div className="mail-view-tab">
@@ -214,6 +222,8 @@ useEffect(()=>{
           discountedPrice={discountedPrice}
           oneTimeGST={oneTimeGST}
           oneTimeTotal={oneTimeTotal}
+          unitPrice={unitPrice}
+          complimentaryProducts={complimentaryProducts}
           />
           }
         </div>

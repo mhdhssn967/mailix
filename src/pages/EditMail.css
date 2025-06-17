@@ -32,3 +32,24 @@
 body{
     background-color: #131212;
 }
+.comp-prods{
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+}
+.comp-prods input{
+    background-color: #4d4c4c;
+    padding: 10px 10px;
+    border: none;
+    color: azure;
+}
+.comp-head{
+    display: flex;
+    align-items: center;
+}
+.comp-head button{
+    padding: 5px;
+    background-color: rgb(213, 217, 221);
+    margin: 10px;
+}

@@ -22,6 +22,7 @@ const OneTimeMail = ({
   discountedPrice,
   oneTimeGST,
   oneTimeTotal,
+  complimentaryProducts
 }) => {
 
   const priceSection=useRef(null)
@@ -173,29 +174,32 @@ const OneTimeMail = ({
               </table>
             </div>
 
-            <div className="quotation-table-div">
-              <h3 style={{ textDecoration: "underline" }}>
-                COMPLEMENTORY PRODUCTS
-              </h3>
-              <table className="quotation-table">
-                <thead>
-                  <tr>
-                    <th>PRODUCT</th>
-                    <th>QTY</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>META QUEST 3</td>
-                    <td>1</td>
-                  </tr>
-                  <tr>
-                    <td>Hygiene Eye Mask Set + Non Alcoholic cleaning wipes</td>
-                    <td>1</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            
+  {complimentaryProducts.length > 0 && (
+    <div className="quotation-table-div">
+  <h3 style={{ textDecoration: "underline" }}>
+    COMPLEMENTORY PRODUCTS
+  </h3>
+    <table className="quotation-table">
+      <thead>
+        <tr>
+          <th>PRODUCT</th>
+          <th>QTY</th>
+        </tr>
+      </thead>
+      <tbody>
+        {complimentaryProducts.map((item, index) => (
+          <tr key={index}>
+            <td>{item.productName}</td>
+            <td>{item.productQuantity}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+  ) }
+
+
             <table className="total-table">
               <tbody>
                 <tr>
