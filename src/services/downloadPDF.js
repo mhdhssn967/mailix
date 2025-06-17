@@ -12,8 +12,8 @@ export const downloadPDF = async (ref) => {
       // Skip if ref is null
       if (!element) continue;
 
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL("image/png");
+      const canvas = await html2canvas(element, { scale: 1, useCORS: true });
+      const imgData = canvas.toDataURL("image/jpeg", 0.7);;
 
       const imgProps = {
         width: canvas.width,

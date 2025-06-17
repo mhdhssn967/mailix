@@ -203,7 +203,7 @@ const OneTimeMail = ({
                 </tr>
                 {discount != 0 && (
                   <>
-                    <tr className="discount glitter-div" >
+                    <tr className="discount" >
                       <td>DISCOUNT</td> <tr>INR {discount}</tr>
                     </tr>
                     <tr className="discount-total">
