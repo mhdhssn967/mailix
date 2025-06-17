@@ -22,7 +22,8 @@ const OneTimeMail = ({
   discountedPrice,
   oneTimeGST,
   oneTimeTotal,
-  complimentaryProducts
+  complimentaryProducts,
+  unitPrice
 }) => {
 
   const priceSection=useRef(null)
@@ -167,7 +168,7 @@ const OneTimeMail = ({
                   <tr>
                     <td>HAPPY MOVES - STANDARD</td>
                     <td>{quantity || "Quantity"}</td>
-                    <td>{price || "Price"}</td>
+                    <td>{unitPrice || "Price"}</td>
                     <td>{price || "Total"}</td>
                   </tr>
                 </tbody>
