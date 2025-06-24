@@ -11,7 +11,7 @@ const HomePage = () => {
     <div className='home-container'>
         <img width={'200px'} src={oq} alt="" />
         <h1>Mailix</h1>
-        <h2>Choose your option</h2>
+        {/* <h2>Choose your option</h2>
         <div className='options-container' >
             <button className='option'>
                 <h3 style={{color:'white'}}>Create a new template</h3>
@@ -19,7 +19,7 @@ const HomePage = () => {
             <button className='option'>
                 <h3 style={{color:'white'}}>Edit your templates</h3>
             </button>
-        </div>
+        </div> */}
         <h1>Select template</h1>
         <div className='templates'>
             {templates.map(temp=>(
