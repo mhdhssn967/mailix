@@ -17,6 +17,7 @@ const EditMail = ({
   setUnitPrice,
   complimentaryProducts,
   setComplimentaryProducts,
+  setProjectTitle
 }) => {
   const handleDownloadPDF = async () => {
     await downloadPDF(pageRefs);
@@ -95,14 +96,24 @@ const EditMail = ({
             />
           </div>
 
-          <div>
+          {template!='Service Works'&&<div>
             <label htmlFor="quantity">Quantity</label>
             <input
               type="number"
               id="quantity"
               onChange={(e) => setQuantity(e.target.value)}
             />
+          </div>}
+
+          {template=='Service Works'&&
+          <div><label htmlFor="Project">Project title</label>
+            <input
+              type="text"
+              id="title"
+              onChange={(e) => setProjectTitle(e.target.value)}
+            />
           </div>
+          }
 
           <div>
             <label htmlFor="price">Price</label>
@@ -127,7 +138,7 @@ const EditMail = ({
         </div>
         <div>
             <div className="comp-head">
-                <h3>Add complimentary products (if any)</h3>
+                <h3>{template!='Service Works'?'Add complimentary products (if any)':'Add Items'}</h3>
                 <button  onClick={handleAddProduct}>
                   Add
                 </button>

@@ -4,6 +4,8 @@ import EditMail from "./EditMail";
 import "./MailSender.css";
 import { useLocation } from "react-router-dom";
 import OneTimeMail from "./OneTimeMail";
+import ServiceWorks from "./ServiceWorks";
+
 
 const MailSender = () => {
   const [date, setDate] = useState(null);
@@ -25,6 +27,7 @@ const MailSender = () => {
   const [oneTimeGST,setOneTimeGST]=useState(0)  
   const [discountedPrice,setDiscountedPrice]=useState(0)
   const [oneTimeTotal,setOneTimeTotal]=useState(0)
+  const [projectTitle,setProjectTitle]=useState(null)
   
 
   const pageRefs = useRef([]);
@@ -190,6 +193,7 @@ useEffect(()=>{
   pageRefs={pageRefs}
   setComplimentaryProducts={setComplimentaryProducts}
   complimentaryProducts={complimentaryProducts}
+  setProjectTitle={setProjectTitle}
 />
         </div>
         <div className="mail-view-tab">
@@ -225,6 +229,27 @@ useEffect(()=>{
           unitPrice={unitPrice}
           complimentaryProducts={complimentaryProducts}
           />
+          }
+          {
+            template=='Service Works'&&<ServiceWorks date={date} validUntil={validUntil} name={name} institutionName={institutionName}
+          addressLine1={addressLine1}
+          addressLine2={addressLine2}
+          quantity={quantity}
+          price={price}
+          gstPrice={gstPrice}
+          gstForOneYear={gstForOneYear}
+          monthTotal={monthTotal}
+          yearTotal={yearTotal}
+          yearlyPrice={yearlyPrice}
+          pageRefs={pageRefs}
+          discount={discount}
+          discountedPrice={discountedPrice}
+          oneTimeGST={oneTimeGST}
+          oneTimeTotal={oneTimeTotal}
+          unitPrice={unitPrice}
+          complimentaryProducts={complimentaryProducts}
+          projectTitle={projectTitle}
+          setQuantity={setQuantity}/>
           }
         </div>
       </div>

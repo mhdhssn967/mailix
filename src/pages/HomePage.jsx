@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const HomePage = () => {
 
-    const templates=['Subscription Model','One-Time Purchase']
+    const templates=['Subscription Model','One-Time Purchase','Service Works']
   return (
     <>
     <div className='home-container'>
