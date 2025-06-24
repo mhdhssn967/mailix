@@ -147,14 +147,13 @@ const EditMail = ({
             {complimentaryProducts.map((product, index) => (
               <div key={index} className="comp-prods">
                 <label>
-                  Product Name {index + 1}  <input
-  list={`product-options-${index}`}
-  type="text"
+                  Product Name {index + 1} <textarea
   value={product.productName}
   onChange={(e) =>
     handleProductChange(index, "productName", e.target.value)
   }
 />
+
 
 <datalist id={`product-options-${index}`}>
   <option value="META QUEST 3" />
