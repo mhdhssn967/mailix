@@ -173,7 +173,7 @@ useEffect(()=>{
   return (
     <>
       <div className="editor">
-        <div className="editor">
+        <div className="editor-form">
           <EditMail
           template={template}
   setDate={setDate}

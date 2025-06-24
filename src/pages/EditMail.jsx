@@ -167,7 +167,7 @@ const EditMail = ({
 
                 </label>
                 <label style={{ marginLeft: "1rem" }}>
-                  Quantity <input
+                  {template!='Service Works'?'Quantity':'Time'} <input
                     type="number"
                     value={product.productQuantity}
                     onChange={(e) =>
