@@ -1,55 +1,60 @@
-.edit-mail{
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: center;
-    gap: 20px;
-    color: white;
+.edit-mail {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 20px;
+  color: white;
 }
-.edit-mail input{
-    width: 250px;
-    height: 25px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: solid 0.5px;
-    margin-bottom: 20px;
-    padding: 7px;
-    background-color: #313030;
+.edit-mail input {
+  width: 250px;
+  height: 25px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: solid 0.5px;
+  margin-bottom: 20px;
+  padding: 7px;
+  background-color: #313030;
 }
-.edit-mail div{
-    display: flex;
-    flex-direction: column;
+textarea {
+  background-color: #313030;
+  border: none;
+  color: white;
 }
-.edit-mail-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.edit-mail div {
+  display: flex;
+  flex-direction: column;
 }
-.edit-mail input{
-    color: white;
+.edit-mail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-body{
-    background-color: #131212;
+.edit-mail input {
+  color: white;
 }
-.comp-prods{
-    margin-bottom: 10px;
-    display: flex;
-    gap: 10px;
-    margin: 10px;
+body {
+  background-color: #131212;
 }
-.comp-prods input{
-    background-color: #4d4c4c;
-    padding: 10px 10px;
-    border: none;
-    color: azure;
+.comp-prods {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  margin: 10px;
 }
-.comp-head{
-    display: flex;
-    align-items: center;
+.comp-prods input {
+  background-color: #4d4c4c;
+  padding: 10px 10px;
+  border: none;
+  color: azure;
 }
-.comp-head button{
-    padding: 5px;
-    background-color: rgb(213, 217, 221);
-    margin: 10px;
+.comp-head {
+  display: flex;
+  align-items: center;
+}
+.comp-head button {
+  padding: 5px;
+  background-color: rgb(213, 217, 221);
+  margin: 10px;
 }

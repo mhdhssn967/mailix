@@ -228,8 +228,8 @@ useEffect(() => {
                   <tbody>
                     {complimentaryProducts.map((item, index) => (
                       <tr key={index}>
-                        <td>{item.productName}</td>
-                        <td style={{ whiteSpace: 'pre-line' }} >{item.productQuantity}</td>
+                        <td style={{ whiteSpace: 'pre-line' }} >{item.productName}</td>
+                        <td >{item.productQuantity}</td>
                       </tr>
                     ))}
                   </tbody>
