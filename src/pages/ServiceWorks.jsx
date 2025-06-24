@@ -37,56 +37,49 @@ const ServiceWorks = ({
   setQuantity(1)
 
   const formatIndianCurrency = (input) => {
-  // Remove commas and whitespace
-  const cleaned = input.toString().replace(/,/g, '').trim();
+    const cleaned = input.toString().replace(/,/g, '').trim();
+    const num = Number(cleaned);
+    if (isNaN(num)) return "Invalid number";
+    return new Intl.NumberFormat('en-IN').format(num);
+  };
 
-  // Convert to number
-  const num = Number(cleaned);
+  const [percentageValues, setPercentageValues] = useState({ thirty: 0, fifty: 0, twenty: 0 });
+  const [cleanTotal, setCleanTotal] = useState(0);
 
-  // Validate number
-  if (isNaN(num)) return "Invalid number";
+  useEffect(() => {
+    const cleaned = oneTimeTotal.toString().replace(/,/g, '').trim();
+    const num = Number(cleaned);
+    setCleanTotal(num)
+  }, [oneTimeTotal])
 
-  // Format in Indian locale
-  return new Intl.NumberFormat('en-IN').format(num);
-};
+  useEffect(() => {
+    if (cleanTotal) {
+      const thirtyVal = cleanTotal * 0.3;
+      const fiftyVal = cleanTotal * 0.5;
+      const twentyVal = cleanTotal * 0.2;
 
-const [percentageValues,setPercentageValues]=useState({thirty:0,fifty:0,twenty:0})
+      setPercentageValues({
+        thirty: formatIndianCurrency(thirtyVal),
+        fifty: formatIndianCurrency(fiftyVal),
+        twenty: formatIndianCurrency(twentyVal),
+      });
+    }
+  }, [cleanTotal]);
 
-const [cleanTotal,setCleanTotal]=useState(0)
-useEffect(()=>{
-const cleaned = oneTimeTotal.toString().replace(/,/g, '').trim();
-  const num = Number(cleaned);
-  setCleanTotal(num)
-},[oneTimeTotal])
-
-
-
-useEffect(() => {
-  if (cleanTotal) {
-    const thirtyVal = cleanTotal * 0.3;
-    const fiftyVal = cleanTotal * 0.5;
-    const twentyVal = cleanTotal * 0.2;
-
-    setPercentageValues({
-      thirty: formatIndianCurrency(thirtyVal),
-      fifty: formatIndianCurrency(fiftyVal),
-      twenty: formatIndianCurrency(twentyVal),
-    });
+  const rowsPerPage = 5;
+  const paginatedProducts = [];
+  for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
+    paginatedProducts.push(complimentaryProducts.slice(i, i + rowsPerPage));
   }
-}, [cleanTotal]);
 
-
-const rowsPerPage = 5;
-const paginatedProducts = [];
-for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
-  paginatedProducts.push(complimentaryProducts.slice(i, i + rowsPerPage));
-}
+  // Index tracker for refs
+  let currentPageIndex = 0;
 
   return (
     <>
       <div className="container-mail-page">
         <h2>Page 1</h2>
-        <div className="page" ref={(el) => (pageRefs.current[0] = el)}>
+        <div className="page" ref={(el) => (pageRefs.current[currentPageIndex++] = el)}>
           <div className="mail-header">
             <img src={OQ} alt="" />
             <div className="adress">
@@ -115,7 +108,6 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
               </div>
               <p>{date || "Date"}</p>
             </div>
-            {/* to adress */}
             <div className="to-adress">
               <p>
                 To,
@@ -141,8 +133,6 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
                 683561
               </p>
             </div>
-
-            {/* mail */}
             <div className="mail-content">
               <p>Dear {institutionName}, </p>
               <p>
@@ -155,10 +145,7 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
                 collaboration and timely delivery throughout the course of this
                 engagement.  
               </p>
-              <p>
-                 <br /> Thank you for
-                considering our proposal.
-              </p>
+              <p><br /> Thank you for considering our proposal.</p>
             </div>
             <div className="regards">
               <p>
@@ -170,107 +157,102 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
               </div>
             </div>
           </div>
-
           <div className="page-footer">
             <a href="https://www.oqulix.com">www.oqulix.com</a>
           </div>
         </div>
 
-        {/* page 2 */}
         <h2>Page 2</h2>
         {paginatedProducts.map((productChunk, pageIndex) => (
-  <div className="page" key={pageIndex} ref={(el) => (pageRefs.current[pageIndex + 1] = el)}>
-    <div className="mail-header" ref={pageIndex === 0 ? priceSection : null}>
-      <img src={OQ} alt="" />
-      <div className="adress">
-              <p>
-                <strong>OQULIX Pvt. Ltd.</strong> <br />
-                14/291 N, Suite 48M 1st Floor,
-                <br /> A Square Building,
-                <br />
-                Edappally ,Edathala P O,
-                <br />
-                Ernakulam, Kerala, 683561
-                <br />
-                <i className="fa-solid fa-phone"></i> +91 9447433005
-                <br />
-                <i className="fa-solid fa-envelope"></i> contact@oqulix.com
-                <br />
-                CIN: U62099KL2023PTC084540
-              </p>
+          <div
+            className="page"
+            key={pageIndex}
+            ref={(el) => (pageRefs.current[currentPageIndex++] = el)}
+          >
+            <div className="mail-header" ref={pageIndex === 0 ? priceSection : null}>
+              <img src={OQ} alt="" />
+              <div className="adress">
+                <p>
+                  <strong>OQULIX Pvt. Ltd.</strong> <br />
+                  14/291 N, Suite 48M 1st Floor,
+                  <br /> A Square Building,
+                  <br />
+                  Edappally ,Edathala P O,
+                  <br />
+                  Ernakulam, Kerala, 683561
+                  <br />
+                  <i className="fa-solid fa-phone"></i> +91 9447433005
+                  <br />
+                  <i className="fa-solid fa-envelope"></i> contact@oqulix.com
+                  <br />
+                  CIN: U62099KL2023PTC084540
+                </p>
+              </div>
             </div>
-    </div>
+            <div className="main-page">
+              <div className="main-page-heading">
+                <div className="left">
+                  <h1>Item Description</h1>
+                </div>
+                <p>{date || "Date"}</p>
+              </div>
+              <div className="quotation-table-div">
+                <table className="quotation-table">
+                  <thead>
+                    <tr>
+                      <th>ITEM</th>
+                      <th>TIME (WEEKS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {productChunk.map((item, index) => (
+                      <tr key={index}>
+                        <td style={{ whiteSpace: "pre-line" }}>{item.productName}</td>
+                        <td>{item.productQuantity}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {pageIndex === paginatedProducts.length - 1 && (
+                <table className="total-table service-total">
+                  <tbody>
+                    <tr>
+                      <td>SUBTOTAL</td>
+                      <td>INR {price}</td>
+                    </tr>
+                    {discount != 0 && (
+                      <>
+                        <tr className="discount">
+                          <td>DISCOUNT</td>
+                          <td>INR {discount}</td>
+                        </tr>
+                        <tr className="discount-total">
+                          <td>DISCOUNTED PRICE</td>
+                          <td>INR {discountedPrice}</td>
+                        </tr>
+                      </>
+                    )}
+                    <tr>
+                      <td>GST 18%</td>
+                      <td>INR {oneTimeGST}</td>
+                    </tr>
+                    <tr className="total-price">
+                      <td>TOTAL PRICE</td>
+                      <td>INR {oneTimeTotal}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+            </div>
+            <div className="page-footer">
+              <a href="https://www.oqulix.com">www.oqulix.com</a>
+            </div>
+          </div>
+        ))}
 
-    <div className="main-page">
-      <div className="main-page-heading">
-        <div className="left">
-          <h1>Item Description</h1>
-        </div>
-        <p>{date || "Date"}</p>
-      </div>
-
-      <div className="quotation-table-div">
-        <table className="quotation-table">
-          <thead>
-            <tr>
-              <th>ITEM</th>
-              <th>TIME (WEEKS)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productChunk.map((item, index) => (
-              <tr key={index}>
-                <td style={{ whiteSpace: "pre-line" }}>{item.productName}</td>
-                <td>{item.productQuantity}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Show price section only on last page */}
-      {pageIndex === paginatedProducts.length - 1 && (
-        <table className="total-table service-total">
-          <tbody>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>INR {price}</td>
-            </tr>
-            {discount != 0 && (
-              <>
-                <tr className="discount">
-                  <td>DISCOUNT</td>
-                  <td>INR {discount}</td>
-                </tr>
-                <tr className="discount-total">
-                  <td>DISCOUNTED PRICE</td>
-                  <td>INR {discountedPrice}</td>
-                </tr>
-              </>
-            )}
-            <tr>
-              <td>GST 18%</td>
-              <td>INR {oneTimeGST}</td>
-            </tr>
-            <tr className="total-price">
-              <td>TOTAL PRICE</td>
-              <td>INR {oneTimeTotal}</td>
-            </tr>
-          </tbody>
-        </table>
-      )}
-    </div>
-
-    <div className="page-footer">
-      <a href="https://www.oqulix.com">www.oqulix.com</a>
-    </div>
-  </div>
-))}
-
-
-        {/* page 3 */}
         <h2>Page 3</h2>
-        <div className="page" ref={(el) => (pageRefs.current[2] = el)}>
+        <div className="page" ref={(el) => (pageRefs.current[currentPageIndex++] = el)}>
           <div className="mail-header">
             <img src={OQ} alt="" />
             <div className="adress">
@@ -293,38 +275,35 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
           </div>
           <div className="main-page">
             <div className="main-page-heading">
-              <div className="left">
-                <p></p>
-              </div>
+              <div className="left"><p></p></div>
               <p>{date || "Date"}</p>
             </div>
-
             <div className="license-agreement">
               <h2 style={{ textDecoration: "underline", textAlign: "center" }}>
                 PAYMENT TERMS
               </h2>
-
-            
-              <ol> <li>
-  <strong>Advance Payment (Project Confirmation)</strong>
-  <ul>
-    <li>
-      30% (INR {percentageValues.thirty}) of the total project cost shall be payable upon confirmation of the project. This amount will serve as an advance payment and is required before the commencement of initial development work. Work will begin once this payment is received.
-    </li>
-  </ul>
-</li>
- <li> <strong>Visualization Presentation Payment (Development Milestone)</strong> <ul> <li> 50% (INR {percentageValues.fifty}) of the total project cost shall be due upon completion of the core development stage, including all deliverables as per the agreed scope. This payment must be made prior to the formal presentation or review of the developed components. </li> </ul> </li> <li> <strong>Project Completion Payment (Before Delivery)</strong> <ul> <li> The remaining 20% (INR {percentageValues.twenty}) of the total project cost shall be payable upon completion of all final deliverables and functionalities. This payment is required before the final handover or deployment of the project. </li> </ul> </li> </ol>
+              <ol>
+                <li><strong>Advance Payment (Project Confirmation)</strong>
+                  <ul>
+                    <li>30% (INR {percentageValues.thirty}) of the total project cost shall be payable upon confirmation of the project. This amount will serve as an advance payment and is required before the commencement of initial development work. Work will begin once this payment is received.</li>
+                  </ul>
+                </li>
+                <li><strong>Visualization Presentation Payment</strong>
+                  <ul><li>50% (INR {percentageValues.fifty}) of the total project cost shall be due upon completion of the core development stage, including all deliverables as per the agreed scope. This payment must be made prior to the formal presentation or review of the developed components.</li></ul>
+                </li>
+                <li><strong>Project Completion Payment</strong>
+                  <ul><li>20% (INR {percentageValues.twenty}) of the total project cost shall be payable upon completion of all final deliverables and functionalities. This payment is required before the final handover or deployment of the project.</li></ul>
+                </li>
+              </ol>
             </div>
-      <h3 style={{marginTop:'380px',textAlign:'center'}}>Please make the payments within the specified timelines mentioned in the payment terms.</h3>
+            <h3 style={{ marginTop: '380px', textAlign: 'center' }}>Please make the payments within the specified timelines mentioned in the payment terms.</h3>
           </div>
-          <div className="page-footer">
-            <a href="https://www.oqulix.com">www.oqulix.com</a>
-          </div>
+          <div className="page-footer"><a href="https://www.oqulix.com">www.oqulix.com</a></div>
         </div>
 
         {/* Page 4 */}
         <h2>Page 4</h2>
-        <div className="page" ref={(el) => (pageRefs.current[3] = el)}>
+        <div className="page" ref={(el) => (pageRefs.current[currentPageIndex++] = el)}>
           <div className="mail-header">
             <img src={OQ} alt="" />
             <div className="adress">
@@ -381,13 +360,12 @@ for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
           </div>
         </div>
 
-        {/* Page 5 */}
-      
+
 
         {/* Page 6 */}
 
         <h2>Page 6</h2>
-        <div className="page" ref={(el) => (pageRefs.current[5] = el)}>
+        <div className="page" ref={(el) => (pageRefs.current[currentPageIndex++] = el)}>
           <div className="mail-header">
             <img src={OQ} alt="" />
             <div className="adress">
