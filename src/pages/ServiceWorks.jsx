@@ -74,6 +74,14 @@ useEffect(() => {
     });
   }
 }, [cleanTotal]);
+
+
+const rowsPerPage = 5;
+const paginatedProducts = [];
+for (let i = 0; i < complimentaryProducts.length; i += rowsPerPage) {
+  paginatedProducts.push(complimentaryProducts.slice(i, i + rowsPerPage));
+}
+
   return (
     <>
       <div className="container-mail-page">
@@ -170,10 +178,11 @@ useEffect(() => {
 
         {/* page 2 */}
         <h2>Page 2</h2>
-        <div className="page" ref={(el) => (pageRefs.current[1] = el)}>
-          <div className="mail-header" ref={priceSection}>
-            <img src={OQ} alt="" />
-            <div className="adress">
+        {paginatedProducts.map((productChunk, pageIndex) => (
+  <div className="page" key={pageIndex} ref={(el) => (pageRefs.current[pageIndex + 1] = el)}>
+    <div className="mail-header" ref={pageIndex === 0 ? priceSection : null}>
+      <img src={OQ} alt="" />
+      <div className="adress">
               <p>
                 <strong>OQULIX Pvt. Ltd.</strong> <br />
                 14/291 N, Suite 48M 1st Floor,
@@ -190,82 +199,74 @@ useEffect(() => {
                 CIN: U62099KL2023PTC084540
               </p>
             </div>
-          </div>
-          <div className="main-page">
-            <div className="main-page-heading">
-              <div className="left">
-                <h1>Item Description</h1>
-              </div>
-              <p>{date || "Date"}</p>
-            </div>
+    </div>
 
-            {/* <div className="quotation-table-div">
-              <table className="quotation-table">
-                <thead>
-                  <tr>
-                    <th>ITEM</th>
-                    <th>TIME(WEEKS)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>HAPPY MOVES - STANDARD</td>
-                    <td>{quantity || "Quantity"}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> */}
-
-            {complimentaryProducts.length > 0 && (
-              <div className="quotation-table-div">
-                <table className="quotation-table">
-                  <thead>
-                    <tr>
-                      <th>ITEM</th>
-                      <th>TIME (WEEKS)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {complimentaryProducts.map((item, index) => (
-                      <tr key={index}>
-                        <td style={{ whiteSpace: 'pre-line' }} >{item.productName}</td>
-                        <td >{item.productQuantity}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            <table className="total-table">
-              <tbody>
-                <tr>
-                  <td>SUBTOTAL</td> <tr>INR {price}</tr>
-                </tr>
-                {discount != 0 && (
-                  <>
-                    <tr className="discount">
-                      <td>DISCOUNT</td> <tr>INR {discount}</tr>
-                    </tr>
-                    <tr className="discount-total">
-                      <td>DISCOUNTED PRICE</td> <tr>INR {discountedPrice}</tr>
-                    </tr>
-                  </>
-                )}
-                <tr>
-                  <td>GST 18%</td> <tr>INR {oneTimeGST}</tr>
-                </tr>
-                <tr className="total-price">
-                  <td>TOTAL PRICE</td>
-                  <td>INR {oneTimeTotal}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="page-footer">
-            <a href="https://www.oqulix.com">www.oqulix.com</a>
-          </div>
+    <div className="main-page">
+      <div className="main-page-heading">
+        <div className="left">
+          <h1>Item Description</h1>
         </div>
+        <p>{date || "Date"}</p>
+      </div>
+
+      <div className="quotation-table-div">
+        <table className="quotation-table">
+          <thead>
+            <tr>
+              <th>ITEM</th>
+              <th>TIME (WEEKS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productChunk.map((item, index) => (
+              <tr key={index}>
+                <td style={{ whiteSpace: "pre-line" }}>{item.productName}</td>
+                <td>{item.productQuantity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Show price section only on last page */}
+      {pageIndex === paginatedProducts.length - 1 && (
+        <table className="total-table service-total">
+          <tbody>
+            <tr>
+              <td>SUBTOTAL</td>
+              <td>INR {price}</td>
+            </tr>
+            {discount != 0 && (
+              <>
+                <tr className="discount">
+                  <td>DISCOUNT</td>
+                  <td>INR {discount}</td>
+                </tr>
+                <tr className="discount-total">
+                  <td>DISCOUNTED PRICE</td>
+                  <td>INR {discountedPrice}</td>
+                </tr>
+              </>
+            )}
+            <tr>
+              <td>GST 18%</td>
+              <td>INR {oneTimeGST}</td>
+            </tr>
+            <tr className="total-price">
+              <td>TOTAL PRICE</td>
+              <td>INR {oneTimeTotal}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+    </div>
+
+    <div className="page-footer">
+      <a href="https://www.oqulix.com">www.oqulix.com</a>
+    </div>
+  </div>
+))}
+
 
         {/* page 3 */}
         <h2>Page 3</h2>

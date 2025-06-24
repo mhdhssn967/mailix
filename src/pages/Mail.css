@@ -140,6 +140,9 @@
 .discount-total{
     font-weight: 700;
 }
+.service-total{
+    margin-top: 50px;
+}
 .total-price{
     font-weight: 800;
     font-size: 20px;
