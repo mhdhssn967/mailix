@@ -6,7 +6,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 
-const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, addressLine2,quantity,price, gstPrice,gstForOneYear,monthTotal,yearTotal, yearlyPrice}) => {
+const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, addressLine2,quantity,price, gstPrice,gstForOneYear,monthTotal,yearTotal, yearlyPrice, discount, oneTimeGST, oneTimeTotal}) => {
   
 
   const priceSection=useRef(null)
@@ -146,8 +146,7 @@ const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, 
                     <th>ITEM</th>
                     <th>QTY</th>
                     <th>PRICE(INR)</th>
-                    <th>GST(18%)</th>
-                    <th>TOTAL</th>
+            
                   </tr>
                 </thead>
                 <tbody>
@@ -155,15 +154,13 @@ const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, 
                     <td>HAPPY MOVES -SUBSCRIPTION (Per Month)</td>
                     <td>{quantity || 'Quantity'}</td>
                     <td>{price || "Price"}</td>
-                    <td>{gstPrice || 'GST'}</td>
-                    <td>{monthTotal || 'Total'}</td>
+                
                   </tr>
                   <tr>
                     <td>HAPPY MOVES -SUBSCRIPTION (For 1 Year)</td>
                     <td>{quantity || 'Quantity'}</td>
                     <td>{yearlyPrice || 'Price'}</td>
-                    <td>{gstForOneYear || 'GST'}</td>
-                    <td>{yearTotal || 'Total'}</td>
+                 
                   </tr>
                 </tbody>
               </table>
@@ -171,14 +168,39 @@ const Mail = ({pageRefs, date, validUntil, name, institutionName, addressLine1, 
                 By taking 1 year subscription you are saving flat INR 24,000/-
               </p>
             </div>
+            <table className="total-table">
+              <tbody>
+                <tr>
+                  <td>SUBTOTAL</td> <tr>INR {yearlyPrice}</tr>
+                </tr>
+                {/* {discount != 0 && (
+                  <>
+                    <tr className="discount" >
+                      <td>DISCOUNT</td> <tr>INR {discount}</tr>
+                    </tr>
+                    <tr className="discount-total">
+                      <td>DISCOUNTED PRICE</td> <tr>INR {discountedPrice}</tr>
+                    </tr>
+                  </>
+                )} */}
+                <tr>
+                  <td>GST 18%</td> <tr>INR {gstForOneYear}</tr>
+                </tr>
+                <tr className="total-price">
+                  <td>TOTAL PRICE</td>
+                  <td>INR {yearTotal}</td>
+                </tr>
+              </tbody>
+            </table>
             <p
               style={{
-                height: "550px",
+                height: "250px",
                 display: "flex",
                 textAlign: "center",
                 alignItems: "end",
               }}
             >
+              
               Please note that the VR device must be purchased separately by the
               clinic. The HappyMoves software is compatible with Meta Quest 2,
               3S, and 3 headsets, with Meta Quest 3 recommended for optimal

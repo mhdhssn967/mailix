@@ -208,6 +208,9 @@ useEffect(()=>{
           yearTotal={yearTotal}
           yearlyPrice={yearlyPrice}
           pageRefs={pageRefs}
+          discount={discount}
+          oneTimeGST={oneTimeGST}
+          oneTimeTotal={oneTimeTotal}
           />
           }
           {
